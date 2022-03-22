@@ -1,0 +1,33 @@
+﻿@using Microsoft.Extensions.Logging
+@model CoopDogsFormation.Models.AuthentificationFormModel
+@{
+    ViewData["Title"] = "Administration";
+}
+
+<form asp-controller="LoginAdmin"
+      asp-action="Authentification"
+      method="post">
+    <p>
+        <label asp-for="Username">Nom d'utilisateur:</label>
+        <input asp-for="Username" type="text" placeholder="Nom d'utilisateur"
+               data-val="true" data-val-required="Le nom d'utilisateur est obligatoire" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="Password">Mot de passe: </label>
+        <input asp-for="Password" type="password" placeholder="Mot de passe" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </p>
+    <p>
+        @if (ViewBag.NotValidate == true)
+        {
+            <span class="text-danger">Le nom d'utilisateur ou le mot de passe est incorrect ! </span>
+        }
+    </p>
+    <input type="submit" value="Se connecter" />
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

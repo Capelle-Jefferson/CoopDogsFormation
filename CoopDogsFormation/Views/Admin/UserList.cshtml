@@ -1,0 +1,89 @@
+﻿@using CoopDogsFormation.Dtos;
+@model CoopDogsFormation.Models.AddUserFormModel
+@{
+    Layout = "_LayoutAdminLogin";
+}
+@*Add css*@
+
+<h1>Liste des utilisteurs <a href="#" OnClick="OpenAdd()"><span id="formValue"></span></a></h1>
+
+@if (@ViewBag.AlertType != "")
+{
+    <div class="alert alert-@ViewBag.AlertType" role="alert">
+        @ViewBag.AlertMsg
+    </div>
+}
+
+<form asp-controller="UserList"
+      asp-action="AddUser"
+      method="post" id="AddDiv">
+    <h2>Ajouter un utilisateur:</h2>
+
+    <div class='mb-3'>
+        <label asp-for="Username" class='form-label'>Nom d'utilisateur:</label>
+        <input asp-for="Username" type="text" placeholder="Nom d'utilisateur" class='form-control' />
+        <span asp-validation-for="Username" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Firstname" class='form-label'>Nom:</label>
+        <input asp-for="Firstname" type="text" placeholder="Nom" class='form-control' />
+        <span asp-validation-for="Firstname" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Lastname" class='form-label'>Prénom:</label>
+        <input asp-for="Lastname" type="text" placeholder="Prénom" class='form-control' />
+        <span asp-validation-for="Lastname" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Password" class='form-label'>Mot de passe:</label>
+        <input asp-for="Password" type="password" placeholder="Mot de passe" class='form-control' />
+        <span asp-validation-for="Password" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="ConfirmPassword" class='form-label'>Confirmation du mot de passe:</label>
+        <input asp-for="ConfirmPassword" type="password" placeholder="Confirmation du mot de passe" class='form-control' />
+        <span asp-validation-for="ConfirmPassword" class='text-danger'></span>
+    </div>
+    <input type="submit" value="Ajouter" class="btn btn-primary" />
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nom d'utilisateur</th>
+            <th scope="col">Nom - prénom</th>
+            <th scope="col">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (UserDto user in ViewBag.Users)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.Firstname - @user.Lastname</td>
+                <td><a asp-controller="UserList" asp-action="DeleteUser" asp-route-id="@user.Id"><img src="~/Files/Icons/delete.png" width="28" height="28" /></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    var x = document.getElementById("AddDiv");
+    var formValue = document.getElementById("formValue");
+    x.style.display = "none";
+    formValue.textContent = "(+)";
+    function OpenAdd() {
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            formValue.textContent = "(-)";
+        } else {
+            x.style.display = "none";
+            formValue.textContent = "(+)";
+        }
+    }
+</script>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

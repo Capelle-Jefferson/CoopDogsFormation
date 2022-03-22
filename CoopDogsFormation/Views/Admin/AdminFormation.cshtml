@@ -1,0 +1,84 @@
+﻿@model CoopDogsFormation.Models.AddFormationFormModel
+@using CoopDogsFormation.Dtos;
+@{
+    Layout = "_LayoutAdminLogin";
+}
+
+<h1>Liste des formations<a href="#" OnClick="OpenAdd()"><span id="formValue"></span></a></h1>
+
+@if (@ViewBag.AlertType != "")
+{
+<div class="alert alert-@ViewBag.AlertType" role="alert">
+    @ViewBag.AlertMsg
+</div>
+}
+
+<form asp-controller="AdminFormation"
+      asp-action="AddFormation"
+      method="post" id="AddDiv">
+    <h2>Ajouter une formation:</h2>
+
+    <div class='mb-3'>
+        <label asp-for="Title" class='form-label'>Titre:</label>
+        <input asp-for="Title" type="text" placeholder="Titre" class='form-control' />
+        <span asp-validation-for="Title" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Description" class='form-label'>Description:</label>
+        <input asp-for="Description" type="text" placeholder="Description" class='form-control' />
+    </div>
+    <input type="submit" value="Ajouter" class="btn btn-primary" />
+</form>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Titre</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date de création</th>
+            <th scope="col">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AdminFormationDto formation in ViewBag.Formations)
+        {
+        <tr>
+            <td>@formation.Title</td>
+            @if (formation.Description != null && formation.Description.Length > 100)
+            {
+                <td>@formation.Description.Substring(0, 100) ...</td>
+            }
+            else
+            {
+                <td>@formation.Description</td>
+            }
+            <td>AJOUTER DATE ET DEMANDE DE CONFIRMATION DE SUPPRESSION</td>
+            <td><a asp-controller="AdminFormation" asp-action="DeleteFormation" asp-route-id="@formation.IdFormations"><img src="~/Files/Icons/delete.png" width="28" height="28" /></a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<script type="text/javascript">
+    var x = document.getElementById("AddDiv");
+    var formValue = document.getElementById("formValue");
+    x.style.display = "none";
+    formValue.textContent = "(+)";
+    function OpenAdd() {
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            formValue.textContent = "(-)";
+        } else {
+            x.style.display = "none";
+            formValue.textContent = "(+)";
+        }
+    }
+</script>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
