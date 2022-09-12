@@ -1,4 +1,5 @@
 ﻿using System;
+using CoopDogsFormation.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -8,6 +9,7 @@ namespace CoopDogsFormation.Models
 {
     public partial class dogsformationsContext : DbContext
     {
+
         public dogsformationsContext()
         {
         }
@@ -27,8 +29,7 @@ namespace CoopDogsFormation.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("Server=localhost;user=root;password=root;database=dogsformations");
+                optionsBuilder.UseMySQL(BddConnect.ConnectChain);
             }
         }
 
@@ -43,7 +44,12 @@ namespace CoopDogsFormation.Models
 
                 entity.HasIndex(e => e.IdFormation, "formation_chapter_idx");
 
+                entity.HasIndex(e => e.UrlVideo, "url_video_UNIQUE")
+                    .IsUnique();
+
                 entity.Property(e => e.IdChapter).HasColumnName("id_chapter");
+
+                entity.Property(e => e.ChapterNumber).HasColumnName("chapter_number");
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
@@ -61,7 +67,6 @@ namespace CoopDogsFormation.Models
                 entity.HasOne(d => d.IdFormationNavigation)
                     .WithMany(p => p.ChapterFormations)
                     .HasForeignKey(d => d.IdFormation)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("formation_chapter");
             });
 
@@ -72,7 +77,12 @@ namespace CoopDogsFormation.Models
 
                 entity.ToTable("formations");
 
+                entity.HasIndex(e => e.Title, "Title_UNIQUE")
+                    .IsUnique();
+
                 entity.Property(e => e.IdFormations).HasColumnName("idFormations");
+
+                entity.Property(e => e.CreatedDate).HasColumnName("created_date");
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
@@ -90,6 +100,10 @@ namespace CoopDogsFormation.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.AllFormationAccess)
+                    .HasColumnType("tinyint")
+                    .HasColumnName("all_formation_access");
+
                 entity.Property(e => e.Firstname)
                     .IsRequired()
                     .HasMaxLength(45)
@@ -104,6 +118,8 @@ namespace CoopDogsFormation.Models
                     .IsRequired()
                     .HasMaxLength(255)
                     .HasColumnName("password");
+
+                entity.Property(e => e.TraceNote).HasColumnName("trace_note");
 
                 entity.Property(e => e.Username)
                     .IsRequired()
@@ -141,6 +157,8 @@ namespace CoopDogsFormation.Models
                 entity.HasIndex(e => e.IdFormation, "idFormation_idx");
 
                 entity.Property(e => e.IdUser).HasColumnName("idUser");
+
+                entity.Property(e => e.CreatedDate).HasColumnName("created_date");
 
                 entity.HasOne(d => d.IdFormationNavigation)
                     .WithMany(p => p.UserFormations)
