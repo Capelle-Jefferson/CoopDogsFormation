@@ -1,6 +1,37 @@
-﻿@{
+﻿@using CoopDogsFormation.Dtos;
+@{
     Layout = "_LayoutLogin";
-    ViewData["Title"] = "Bienvenue !";
+    ViewData["Title"] = "Vos formations";
 }
 
-TEST
+@section Head{
+    <link rel="stylesheet" href="~/css/formation.css" />
+}
+
+<h1>Liste de vos formations:</h1>
+
+<div class="row">
+    @foreach (FormationDto formation in ViewBag.Formations)
+    {
+        <div class="col-sm-6 margin-bottom">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@formation.Title</h5>
+
+                    @if (formation.Description != null && formation.Description.Length > 150)
+                    {
+                        <p class="card-text lines">@formation.Description.Substring(0, 150)</p>
+                    }
+                    else
+                    {
+                        <p class="card-text lines">@formation.Description</p>
+                    }
+                    <a asp-controller="Formation"
+                       asp-action="ConsultFormation"
+                       asp-route-id="@formation.IdFormations"
+                       class="card-link">Consulter</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

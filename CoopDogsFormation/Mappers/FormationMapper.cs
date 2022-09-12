@@ -17,22 +17,47 @@ namespace CoopDogsFormation.Mappers
             UsersServices = new UsersServices();
         }
 
-        public static Formation ConvertAddFormationFormModelToFormation(AddFormationFormModel formation)
+        public static Formation ConvertAddFormationFormModelToFormation(AddFormationFormModel model)
         {
             return new Formation
             {
-                Title = formation.Title,
-                Description = formation.Description,
+                Title = model.Title,
+                Description = model.Description,
+                CreatedDate = DateTime.Today,
             };
         }
 
-        public static AdminFormationDto ConvertFormationsToDto(Formation model)
+        public static ChapterFormation ConvertAddChapterFormationFormModelToChapterFormation(AddChapterFormationFormModel model)
         {
-            return new AdminFormationDto
+            return new ChapterFormation
+            {
+                ChapterNumber = model.Number,
+                Description = model.Description,
+                IdFormation = model.IdFormation,
+                Title = model.Title,
+                UrlVideo = model.File?.FileName,
+            };
+        }
+
+        public static FormationDto ConvertWithoutFormationsToDto(Formation model)
+        {
+            return new FormationDto
             {
                 IdFormations = model.IdFormations,
                 Title = model.Title,
                 Description = model.Description,
+                CreatedDate = model.CreatedDate,
+            };
+        }
+
+        public static FormationDto ConvertFormationsToDto(Formation model)
+        {
+            return new FormationDto
+            {
+                IdFormations = model.IdFormations,
+                Title = model.Title,
+                Description = model.Description.Replace("\\n", "\n"),
+                CreatedDate = model.CreatedDate,
                 Users = model.UserFormations
                     .Select(user => UsersServices.GetUser(user.IdUser))
                     .ToList(),

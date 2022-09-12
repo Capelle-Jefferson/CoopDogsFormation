@@ -18,7 +18,7 @@ namespace CoopDogsFormation.Controllers
     /// <summary>
     /// Controller des utilisateurs
     /// </summary>
-    public class UserController : Controller
+    public class UserController : AbtractController
     {
         /// <summary>
         /// Service utilisateur
@@ -62,14 +62,14 @@ namespace CoopDogsFormation.Controllers
                 {
                     // création de claims inclus dans une identité
                     List<Claim> claims = new List<Claim> {
-                        new Claim(ClaimTypes.Name, user.Username),
-                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                         new Claim(ClaimTypes.Name, user.Username),
                     };
                     ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                     // Authentification de l'utilisateur
                     HttpContext.SignInAsync(new ClaimsPrincipal(identity));
-                    return Redirect("/Formation/FormationList");
+                    return RedirectToAction("FormationList", "Formation");
                 }
             }
             return View("UserConnexion");
@@ -86,6 +86,16 @@ namespace CoopDogsFormation.Controllers
         {
             HttpContext.SignOutAsync();
             return Redirect("/Connexion");
+        }
+
+
+        // Fiche suivi
+
+        public IActionResult UserTrace()
+        {
+            UserDto user = UsersServices.GetUser(GetUserId());
+            ViewBag.User = user;
+            return View();
         }
     }
 }

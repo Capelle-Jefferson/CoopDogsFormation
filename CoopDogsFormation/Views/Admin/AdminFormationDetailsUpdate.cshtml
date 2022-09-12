@@ -1,0 +1,29 @@
+﻿@model CoopDogsFormation.Models.AddChapterFormationFormModel
+@using CoopDogsFormation.Dtos;
+@{
+    Layout = "_LayoutAdminLogin";
+}
+<a asp-controller="AdminFormation" asp-action="Details" asp-route-id="@ViewBag.Formation.IdFormations"><span>Revenir aux détails de la formation</span></a>
+<h2>Modification du chapitre '@ViewBag.Chapter.Title' de la formation '@ViewBag.Formation.Title'</h2>
+
+<form asp-controller="AdminFormation"
+      asp-action="UpdateChapter"
+      asp-route-idChapter="@ViewBag.Chapter.IdChapter"
+      asp-route-idFormation="@ViewBag.Formation.IdFormations"
+      method="post" id="AddDiv"
+      enctype="multipart/form-data">
+    <div class='mb-3'>
+        <label asp-for="Title" class='form-label'>Titre:</label>
+        <input asp-for="Title" type="text" placeholder="Titre" class='form-control' value="@ViewBag.Chapter.Title"/>
+        <span asp-validation-for="Title" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Description" class='form-label'>Description:</label>
+        @Html.TextArea("Description", (string)(ViewBag.Chapter.Description), new { @class = "form-control", name = "Description", rows="5" })
+    </div>
+    <div class='mb-3'>
+        <label asp-for="File" class='form-label'>Vidéo:</label>
+        <input asp-for="File" class='form-control' value="@ViewBag.Chapter.UrlVideo"/>
+    </div>
+    <input type="submit" value="Modifier" class="btn btn-primary" />
+</form>

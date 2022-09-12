@@ -9,14 +9,16 @@ namespace CoopDogsFormation.Mappers
 {
     public static class ChapterFormationMapper
     {
-        public static AdminChapterFormationDto ConvertChapterFormationToDto(ChapterFormation model)
+        public static ChapterFormationDto ConvertChapterFormationToDto(ChapterFormation model)
         {
-            return new AdminChapterFormationDto
+            return new ChapterFormationDto
             {
-                Description = model.Description,
+                Description = model.Description.Replace("\\n", "\n"),
                 IdChapter = model.IdChapter,
+                Number = model.ChapterNumber,
                 Title = model.Title,
                 UrlVideo = model.UrlVideo,
+                IdFormation = model.IdFormation,
             };
         }
     }

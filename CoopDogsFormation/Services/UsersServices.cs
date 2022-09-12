@@ -65,15 +65,15 @@ namespace CoopDogsFormation.Services
         /// </summary>
         public List<UserDto> GetUsers()
         {
-            return Context.Users.Select(user => user).ToList()
+            return Context.Users
                 .Select(user => UserMapper.ConvertUserModelToDto(user))
                 .ToList();
         }
 
         public UserDto GetUser(long id)
         {
-            return UserMapper.ConvertUserModelToDto(
-                Context.Users.FirstOrDefault(user => user.Id == id));
+            List<User> l = Context.Users.ToList();
+            return UserMapper.ConvertUserModelToDto(l.FirstOrDefault(user => user.Id == id));
         }
         #endregion Get
 
@@ -85,11 +85,46 @@ namespace CoopDogsFormation.Services
                 Context.Users.Add(UserMapper.ConvertAddUserFormModelToUser(user));
                 Context.SaveChanges();
             }
-            catch (DbUpdateException ex)
+            catch 
             {
                 return new Tuple<bool, string>(false, "Nom d'utilisateur déjà existant");
             }
             return new Tuple<bool, string>(true, "L'utilisateur à bien été ajouté !");
+        }
+
+        public Tuple<bool, string> UpdateUser(int id, UpdateUserFormModel user)
+        {
+            try
+            {
+                User u = Context.Users.FirstOrDefault(user => user.Id == id);
+                u.Lastname = user.Lastname;
+                u.Firstname = user.Firstname;
+                u.Username = user.Username;
+                if (!string.IsNullOrEmpty(user.Password)){
+                    u.Password = EncodingPassword(user.Password);
+                }
+                Context.SaveChanges();
+            }
+            catch
+            {
+                return new Tuple<bool, string>(false, "Une erreur est survenue :'(");
+            }
+            return new Tuple<bool, string>(true, "L'utilisateur à bien été modifié !");
+        }
+
+        public Tuple<bool, string> UpdateUserTrace(int id, UpdateUserTraceFromModel user)
+        {
+            try
+            {
+                User u = Context.Users.FirstOrDefault(user => user.Id == id);
+                u.TraceNote = user.TraceNote;
+                Context.SaveChanges();
+            }
+            catch
+            {
+                return new Tuple<bool, string>(false, "Une erreur est survenue :'(");
+            }
+            return new Tuple<bool, string>(true, "L'utilisateur à bien été modifié !");
         }
 
         public Tuple<bool, string> DeleteUser(int id)

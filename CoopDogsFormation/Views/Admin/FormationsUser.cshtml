@@ -1,0 +1,90 @@
+﻿@using CoopDogsFormation.Dtos;
+@{
+    Layout = "_LayoutAdminLogin";
+}
+
+<h1>Liste des formations de '@ViewBag.User.Firstname @ViewBag.User.Lastname'</h1>
+
+@if (@ViewBag.AlertType != "")
+{
+    <div class="alert alert-@ViewBag.AlertType" role="alert">
+        @ViewBag.AlertMsg
+    </div>
+}
+
+<h2>Ses formations:</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Titre</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date de création</th>
+            <th scope="col">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (FormationDto formation in ViewBag.AccessibleFormations)
+        {
+        <tr>
+            <td>@formation.Title</td>
+            @if (formation.Description != null && formation.Description.Length > 100)
+            {
+                <td>@formation.Description.Substring(0, 100) ...</td>
+            }
+            else
+            {
+                <td>@formation.Description</td>
+            }
+            <td>@formation.CreatedDate.ToString("dd/MM/yyyy")</td>
+            <td>
+                <a asp-controller="UserList"
+                   asp-action="DeleteUserFormation"
+                   asp-route-idFormation="@formation.IdFormations"
+                   asp-route-idUser="@ViewBag.User.Id">
+                    <img src="~/Files/Icons/delete.png" width="28" height="28" />
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<h2>Formations non accéssibles:</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Titre</th>
+            <th scope="col">Description</th>
+            <th scope="col">Nombre de chapitre</th>
+            <th scope="col">Date de création</th>
+            <th scope="col">Ajouter</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (FormationDto formation in ViewBag.NotAccessibleFormations)
+        {
+            <tr>
+                <td>@formation.Title</td>
+                @if (formation.Description != null && formation.Description.Length > 100)
+                {
+                    <td>@formation.Description.Substring(0, 100) ...</td>
+                }
+                else
+                {
+                    <td>@formation.Description</td>
+                }
+                <td>@formation.ChapterFormations.Count</td>
+                <td>@formation.CreatedDate.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a asp-controller="UserList"
+                       asp-action="AddUserFormation"
+                       asp-route-idFormation="@formation.IdFormations"
+                       asp-route-idUser="@ViewBag.User.Id">
+                        <img src="~/Files/Icons/add.png" width="28" height="28" />
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

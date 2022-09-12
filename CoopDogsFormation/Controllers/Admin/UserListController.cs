@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 namespace CoopDogsFormation.Controllers.Admin
 {
     [Authorize(Roles = "Admin")]
-    public class UserListController : Controller
+    public class UserListController : AbtractController
     {
         public UsersServices UsersServices { get; set; }
+        public UserFormationServices UserFormationServices { get; set; }
         public UserListController()
         {
             UsersServices = new UsersServices();
+            UserFormationServices = new UserFormationServices();
         }
 
         /// <summary>
@@ -61,6 +63,76 @@ namespace CoopDogsFormation.Controllers.Admin
                 ViewBag.AlertType = "danger";
             ViewBag.AlertMsg = res.Item2;
             return Index();
+        }
+
+        public IActionResult GoUpdateUser(int id)
+        {
+            ViewBag.User = UsersServices.GetUser(id);
+            return View("../Admin/UserUpdate");
+        }
+
+        public IActionResult UpdateUser(int id, UpdateUserFormModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                Tuple<bool, String> res = UsersServices.UpdateUser(id, user);
+                if (res.Item1)
+                    ViewBag.AlertType = "success";
+                else
+                    ViewBag.AlertType = "danger";
+                ViewBag.AlertMsg = res.Item2;
+            }
+            else
+            {
+                return GoUpdateUser(id);
+            }
+            return Index();
+        }
+
+
+        public IActionResult GoFormationUser(int id)
+        {
+            ViewBag.User = UsersServices.GetUser(id);
+            Tuple<List<FormationDto>, List<FormationDto>> formations =
+                UserFormationServices.GetAdminFormationForUser(id);
+            ViewBag.AccessibleFormations = formations.Item1;
+            ViewBag.NotAccessibleFormations = formations.Item2;
+
+            return View("../Admin/FormationsUser");
+        }
+
+        public IActionResult AddUserFormation(int idFormation, int idUser)
+        {
+            Tuple<bool, string> res = UserFormationServices.AddUserFormation(idFormation, idUser);
+            AlertMessage(res);
+            return GoFormationUser(idUser);
+        }
+
+        public IActionResult DeleteUserFormation(int idFormation, int idUser)
+        {
+            Tuple<bool, string> res = UserFormationServices.DeleteUserFormation(idFormation, idUser);
+            AlertMessage(res);
+            return GoFormationUser(idUser);
+        }
+
+        public IActionResult GoUserTrace(int id)
+        {
+            ViewBag.User = UsersServices.GetUser(id);
+            return View("../Admin/UserTrace");
+        }
+
+        public IActionResult UserTrace(int id, UpdateUserTraceFromModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                Tuple<bool, String> res = UsersServices.UpdateUserTrace(id, user);
+                if (res.Item1)
+                    ViewBag.AlertType = "success";
+                else
+                    ViewBag.AlertType = "danger";
+                ViewBag.AlertMsg = res.Item2;
+            }
+            return GoUserTrace(id);
         }
     }
 }

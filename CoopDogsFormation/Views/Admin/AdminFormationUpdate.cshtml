@@ -1,0 +1,26 @@
+﻿@model CoopDogsFormation.Models.AddFormationFormModel
+@using CoopDogsFormation.Dtos;
+@{
+    Layout = "_LayoutAdminLogin";
+}
+<a asp-controller="AdminFormation" asp-action="Index"><span>Revenir à la liste des formations</span></a>
+<h1>Modification de la formation '@ViewBag.Formation.Title'</h1>
+
+<form asp-controller="AdminFormation"
+      asp-action="UpdateFormation"
+      asp-route-id="@ViewBag.Formation.IdFormations"
+      method="post" id="AddDiv">
+    <h2>Ajouter une formation:</h2>
+
+    <div class='mb-3'>
+        <label asp-for="Title" class='form-label'>Titre:</label>
+        <input asp-for="Title" type="text" placeholder="Titre" class='form-control' value="@ViewBag.Formation.Title" />
+        <span asp-validation-for="Title" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Description" class='form-label'>Description:</label>
+        @Html.TextArea("Description", (string)(ViewBag.Formation.Description), new { @class = "form-control", name = "Description", rows = "5" })
+
+    </div>
+    <input type="submit" value="Modifier" class="btn btn-primary" />
+</form>

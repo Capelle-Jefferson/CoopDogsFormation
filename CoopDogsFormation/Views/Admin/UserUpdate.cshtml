@@ -1,0 +1,49 @@
+﻿@using CoopDogsFormation.Dtos;
+@model CoopDogsFormation.Models.UpdateUserFormModel
+
+@{
+    Layout = "_LayoutAdminLogin";
+}
+
+<h1>Modification de l'utilisateur @ViewBag.User.Firstname - @ViewBag.User.Lastname</h1>
+
+
+@if (@ViewBag.AlertType != "")
+{
+    <div class="alert alert-@ViewBag.AlertType" role="alert">
+        @ViewBag.AlertMsg
+    </div>
+}
+
+<form asp-controller="UserList"
+      asp-action="UpdateUser"
+      asp-route-id="@ViewBag.User.Id"
+      method="post">
+
+    <div class='mb-3'>
+        <label asp-for="Username" class='form-label'>Nom d'utilisateur:</label>
+        <input asp-for="Username" type="text" placeholder="Nom d'utilisateur" class='form-control' value="@ViewBag.User.Username"/>
+        <span asp-validation-for="Username" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Firstname" class='form-label'>Nom:</label>
+        <input asp-for="Firstname" type="text" placeholder="Nom" class='form-control' value="@ViewBag.User.Firstname"/>
+        <span asp-validation-for="Firstname" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Lastname" class='form-label'>Prénom:</label>
+        <input asp-for="Lastname" type="text" placeholder="Prénom" class='form-control' value="@ViewBag.User.Lastname"/>
+        <span asp-validation-for="Lastname" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Password" class='form-label'>Nouveau mot de passe:</label>
+        <input asp-for="Password" type="password" placeholder="Mot de passe" class='form-control' />
+        <span asp-validation-for="Password" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="ConfirmPassword" class='form-label'>Confirmation du nouveau mot de passe:</label>
+        <input asp-for="ConfirmPassword" type="password" placeholder="Confirmation du mot de passe" class='form-control' />
+        <span asp-validation-for="ConfirmPassword" class='text-danger'></span>
+    </div>
+    <input type="submit" value="Modifier" class="btn btn-primary" />
+</form>

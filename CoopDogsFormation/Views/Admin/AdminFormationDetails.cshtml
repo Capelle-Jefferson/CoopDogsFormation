@@ -1,0 +1,101 @@
+﻿@model CoopDogsFormation.Models.AddChapterFormationFormModel
+@using CoopDogsFormation.Dtos;
+@{
+    Layout = "_LayoutAdminLogin";
+}
+<a asp-controller="AdminFormation" asp-action="Index"><span>Revenir à la liste des formations</span></a>
+<h1>Détails de la formation: @ViewBag.Formation.Title</h1>
+
+@*------------------------- Ajout -----------------------*@
+<button class="btn btn-primary" href="#" OnClick="OpenAdd()">
+    <span id="formValue"></span>
+</button>
+
+@if (@ViewBag.AlertType != "")
+{
+    <div class="alert alert-@ViewBag.AlertType" role="alert">
+        @ViewBag.AlertMsg
+    </div>
+}
+
+<form asp-controller="AdminFormation"
+      asp-action="AddChapter"
+      asp-route-id="@ViewBag.Formation.IdFormations"
+      method="post" id="AddDiv"
+      enctype="multipart/form-data">
+    <h2>Ajouter un chapitre:</h2>
+    <div class='mb-3'>
+        <label asp-for="Title" class='form-label'>Titre:</label>
+        <input asp-for="Title" type="text" placeholder="Titre" class='form-control' />
+        <span asp-validation-for="Title" class='text-danger'></span>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="Description" class='form-label'>Description:</label>
+        <textarea asp-for="Description" placeholder="Description" class='form-control' rows="5"></textarea>
+    </div>
+    <div class='mb-3'>
+        <label asp-for="File" class='form-label'>Vidéo:</label>
+        <input asp-for="File" class='form-control' />
+    </div>
+    <input type="submit" value="Ajouter" class="btn btn-primary" />
+    <br />
+</form>
+
+@*---------------------------------------------------------*@
+
+@*--------------- Affichage des chapitres -----------------*@
+<div class="accordion accordion-flush" id="accordionFormation">
+    @foreach (ChapterFormationDto chapter in ViewBag.Formation.ChapterFormations)
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="h_@chapter.Number">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c_@chapter.Number" aria-expanded="false" aria-controls="c_@chapter.Number">
+                    Chapitre @chapter.Number - @chapter.Title
+                </button>
+                <a asp-controller="AdminFormation"
+                   asp-action="DeleteChapter"
+                   asp-route-idChapter="@chapter.IdChapter"
+                   asp-route-idFormation="@ViewBag.Formation.IdFormations"
+                   onclick="return confirm('Voulez vous supprimer le chaptitre @chapter.Title ?')"><img src="~/Files/Icons/delete.png" width="28" height="28" /></a>
+                <a asp-controller="AdminFormation"
+                   asp-action="GoUpdateChapter"
+                   asp-route-idChapter="@chapter.IdChapter"><img src="~/Files/Icons/update.png" width="28" height="28" /></a>
+            </h2>
+            <div id="c_@chapter.Number" class="accordion-collapse collapse" aria-labelledby="h_@chapter.Number" data-bs-parent="#accordionFormation">
+                <div class="accordion-body">
+                    <p class="lines">@chapter.Description</p>
+                    @if (!string.IsNullOrEmpty(chapter.UrlVideo))
+                    {
+                        <video controls width="560"
+                               height="315"
+                               style="margin:5px auto 2px auto; display:block;">
+                            <source src="~/Files/Videos/@chapter.UrlVideo" />
+                        </video>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@*---------------------------------------------------------*@
+<script type="text/javascript">
+    var x = document.getElementById("AddDiv");
+    var formValue = document.getElementById("formValue");
+    x.style.display = "none";
+    formValue.textContent = "Ajouter un chapitre";
+    function OpenAdd() {
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            formValue.textContent = "Ajouter un chapitre (-)";
+        } else {
+            x.style.display = "none";
+            formValue.textContent = "Ajouter un chapitre";
+        }
+    }
+</script>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

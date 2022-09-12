@@ -50,22 +50,54 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Nom d'utilisateur</th>
-            <th scope="col">Nom - prénom</th>
-            <th scope="col">Supprimer</th>
+            <th scope="col" width="30%" >Nom d'utilisateur</th>
+            <th scope="col" width="30%" >Nom - prénom</th>
+            <th scope="col" width="10%" >Formations</th>
+            <th scope="col" width="10%" >Suivi</th>
+            <th scope="col" width="10%" >Modifier</th>
+            <th scope="col" width="10%" >Supprimer</th>
         </tr>
     </thead>
     <tbody>
         @foreach (UserDto user in ViewBag.Users)
         {
-            <tr>
-                <td>@user.Username</td>
-                <td>@user.Firstname - @user.Lastname</td>
-                <td><a asp-controller="UserList" asp-action="DeleteUser" asp-route-id="@user.Id"><img src="~/Files/Icons/delete.png" width="28" height="28" /></a></td>
-            </tr>
+        <tr>
+            <td>@user.Username</td>
+            <td>@user.Firstname - @user.Lastname</td>
+            <td>
+                <a asp-controller="UserList"
+                   asp-action="GoFormationUser"
+                   asp-route-id="@user.Id">
+                    <img src="~/Files/Icons/formation.png" width="28" height="28" />
+                </a>
+            </td>
+            <td>
+                <a asp-controller="UserList"
+                   asp-action="GoUserTrace"
+                   asp-route-id="@user.Id">
+                    <img src="~/Files/Icons/suivi.png" width="28" height="28" />
+                </a>
+            </td>
+            <td>
+                <a asp-controller="UserList"
+                   asp-action="GoUpdateUser"
+                   asp-route-id="@user.Id">
+                    <img src="~/Files/Icons/update.png" width="28" height="28" />
+                </a>
+            </td>
+            <td>
+                <a asp-controller="UserList"
+                   asp-action="DeleteUser"
+                   asp-route-id="@user.Id"
+                   onclick="return confirm('Voulez vous supprimer l\'utilisateur @user.Username ?')">
+                    <img src="~/Files/Icons/delete.png" width="28" height="28" />
+                </a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
+
 
 <script type="text/javascript">
     var x = document.getElementById("AddDiv");
@@ -81,6 +113,7 @@
             formValue.textContent = "(+)";
         }
     }
+
 </script>
 
 @section Scripts{

@@ -1,0 +1,43 @@
+﻿@using CoopDogsFormation.Dtos;
+@{
+    Layout = "_LayoutLogin";
+    ViewData["Title"] = "Formation: " + @ViewBag.Formation.Title;
+}
+<a asp-controller="Formation" asp-action="FormationList"><span>Revenir à la liste des formations</span></a>
+<h1>Formation: @ViewBag.Formation.Title</h1>
+
+<p class="lines">@ViewBag.Formation.Description</p>
+
+<div class="accordion accordion-flush" id="accordionFormation">
+
+    @foreach (ChapterFormationDto chapter in ViewBag.Formation.ChapterFormations)
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="h_@chapter.Number">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c_@chapter.Number" aria-expanded="false" aria-controls="c_@chapter.Number">
+                    Chapitre @chapter.Number - @chapter.Title
+                </button>
+            </h2>
+            <div id="c_@chapter.Number" class="accordion-collapse collapse" aria-labelledby="h_@chapter.Number" data-bs-parent="#accordionFormation">
+                <div class="accordion-body">
+                    <p class="lines">@chapter.Description</p>
+                    @if (!string.IsNullOrEmpty(chapter.UrlVideo))
+                    {
+                        <video controls width="560"
+                               height="315"
+                               style="margin:5px auto 2px auto; display:block;">
+                            <source src="~/Files/Videos/@chapter.UrlVideo" />
+                        </video>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

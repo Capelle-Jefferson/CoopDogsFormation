@@ -1,0 +1,26 @@
+﻿@using CoopDogsFormation.Dtos;
+@model CoopDogsFormation.Models.UpdateUserTraceFromModel;
+
+@{
+    Layout = "_LayoutAdminLogin";
+}
+
+<h1>Suivi de @ViewBag.User.Firstname - @ViewBag.User.Lastname</h1>
+
+@if (@ViewBag.AlertType != "")
+{
+    <div class="alert alert-@ViewBag.AlertType" role="alert">
+        @ViewBag.AlertMsg
+    </div>
+}
+
+<form asp-controller="UserList"
+      asp-action="UserTrace"
+      asp-route-id="@ViewBag.User.Id"
+      method="post">
+
+    <div class='mb-3'>
+        @Html.TextArea("TraceNote", (string)(ViewBag.User.TraceNote), new { @class = "form-control", name = "TraceNote", rows = "30" })
+    </div>
+    <input type="submit" value="Modifier" class="btn btn-primary" />
+</form>

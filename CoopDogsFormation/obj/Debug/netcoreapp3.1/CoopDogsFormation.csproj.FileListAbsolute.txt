@@ -77,3 +77,13 @@ F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\bin\Debug\netcor
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\User\AccessDenied.cshtml.g.cs
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdminLogin.cshtml.g.cs
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminFormation.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Icons.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminFormationDetails.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminFormationUpdate.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminFormationDetailsUpdate.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\FormationsUser.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Formation\ConsultFormation.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Formation\Index.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserUpdate.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserTrace.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\User\UserTrace.cshtml.g.cs

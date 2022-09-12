@@ -21,7 +21,9 @@ namespace CoopDogsFormation.Mappers
                 Firstname = model.Firstname,
                 Id = model.Id,
                 Lastname = model.Lastname,
-                Username = model.Username,            
+                Username = model.Username,
+                AllFormationAccess = model.AllFormationAccess,
+                TraceNote = model.TraceNote,
             };
         }
 

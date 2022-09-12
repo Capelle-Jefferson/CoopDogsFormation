@@ -29,5 +29,15 @@ namespace CoopDogsFormation.Dtos
         /// Prénom 
         /// </summary>
         public string Lastname { get; set; }
+        
+        /// <summary>
+        /// Note de suivi
+        /// </summary>
+        public string TraceNote { get; set; }
+
+        /// <summary>
+        /// Accès à toutes les formations
+        /// </summary>
+        public bool AllFormationAccess { get; set; }
     }
 }
