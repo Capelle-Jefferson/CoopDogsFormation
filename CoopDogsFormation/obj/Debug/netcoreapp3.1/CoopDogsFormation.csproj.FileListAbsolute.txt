@@ -8,7 +8,6 @@ F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\bin\Debug\netcor
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\bin\Debug\netcoreapp3.1\CoopDogsFormation.pdb
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\bin\Debug\netcoreapp3.1\CoopDogsFormation.Views.dll
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\bin\Debug\netcoreapp3.1\CoopDogsFormation.Views.pdb
-F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.csprojAssemblyReference.cache
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.AssemblyInfoInputs.cache
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.AssemblyInfo.cs
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.csproj.CoreCompileInputs.cache
@@ -16,8 +15,6 @@ F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcor
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.RazorAssemblyInfo.cache
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.RazorAssemblyInfo.cs
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\staticwebassets\CoopDogsFormation.StaticWebAssets.Manifest.cache
-F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\staticwebassets\CoopDogsFormation.StaticWebAssets.xml
-F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\scopedcss\bundle\CoopDogsFormation.styles.css
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.TagHelpers.input.cache
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.TagHelpers.output.cache
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.RazorCoreGenerate.cache
@@ -87,3 +84,6 @@ F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcor
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserUpdate.cshtml.g.cs
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\Admin\UserTrace.cshtml.g.cs
 F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\Razor\Views\User\UserTrace.cshtml.g.cs
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\bin\Debug\netcoreapp3.1\CoopDogsFormation.StaticWebAssets.xml
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.csproj.AssemblyReference.cache
+F:\dev\ProjetManonFormation\CoopDogsFormation\CoopDogsFormation\obj\Debug\netcoreapp3.1\CoopDogsFormation.GeneratedMSBuildEditorConfig.editorconfig
